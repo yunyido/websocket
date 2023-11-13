@@ -1,0 +1,27 @@
+<html>
+<body>
+<h1>hello SSE!!!</h1>
+<ul></ul>
+<script>
+    const eventList = document.querySelector("ul");
+    const eventSource = new EventSource('/sse');
+    eventSource.onopen = function () {
+        console.log('connection is established');
+    };
+    eventSource.onerror = function (error) {
+        console.log('connection state: ' + eventSource.readyState + ', error: ' + error);
+    };
+    eventSource.onmessage = function (event) {
+        if (event.data.endsWith('end')) {
+            eventSource.close();
+            console.log('connection is closed');
+        }
+        const newElement = document.createElement("li");
+        newElement.textContent = "message:" + event.data;
+        eventList.appendChild(newElement);
+    };
+</script>
+
+
+</body>
+</html>
