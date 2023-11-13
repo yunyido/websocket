@@ -29,9 +29,10 @@ jobs:
         cache: maven
     - name: Build with Maven
       run: mvn -B package -DskipTests --file pom.xml
-    - name: Publish to Registry
-      uses: elgohr/Publish-Docker-Github-Action@master
-      with:
-        name: registry.cn-hangzhou.aliyuncs.com/yido/websocket
-        username: "a549137619"
-        password: "leime727299"
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile --tag registry.cn-hangzhou.aliyuncs.com/yido/websocket:$(date +%s)
+    - name: Login Docker
+      run: docker login --username=a549137619 --password=leime727299 registry.cn-hangzhou.aliyuncs.com
+    - name: Push Docker Image
+      run: docker push registry.cn-hangzhou.aliyuncs.com/yido/websocket:$(date +%s)
+    
