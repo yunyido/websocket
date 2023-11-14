@@ -47,6 +47,6 @@ jobs:
             bash /opt/idcos-docker/docker-deploy.sh
             echo "login docker..."
             docker login --username=a549137619 --password=leime727299 registry.cn-hangzhou.aliyuncs.com
-            docker pull registry.cn-hangzhou.aliyuncs.com/yido/websocket:$GITHUB_RUN_ID
+            docker pull registry.cn-hangzhou.aliyuncs.com/yido/websocket:${{GITHUB_RUN_ID}}
             echo "start service...."
-            docker run -p 8080:8080 -d registry.cn-hangzhou.aliyuncs.com/yido/websocket:$GITHUB_RUN_ID
+            docker run -p 8080:8080 -d registry.cn-hangzhou.aliyuncs.com/yido/websocket:${{GITHUB_RUN_ID}}
