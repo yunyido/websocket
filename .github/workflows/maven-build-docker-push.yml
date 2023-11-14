@@ -17,10 +17,8 @@ env:
   tag: $(date +%s)
 
 jobs:
-  build:
-
+  build_and_deploy:
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v3
     - name: Set up JDK 17
@@ -37,16 +35,13 @@ jobs:
       run: docker login --username=a549137619 --password=leime727299 registry.cn-hangzhou.aliyuncs.com
     - name: Push Docker Image
       run: docker push registry.cn-hangzhou.aliyuncs.com/yido/websocket:$GITHUB_RUN_ID
-
-  deploy:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: appleboy/ssh-action@v1.0.0
-        with:
-          host: 121.41.72.174
-          username: root
-          password: Abc123456
-          script: |
+    - name: deploy service
+      uses: appleboy/ssh-action@v1.0.0
+      with:
+        host: 121.41.72.174
+        username: root
+        password: Abc123456
+        script: |
             echo "install docker..."
             test -f /opt/idcos-docker/docker-deploy.sh || curl -o /opt/idcos-docker/docker-deploy.sh http://yum.idcos.com/opensource/docker/docker-deploy.sh
             bash /opt/idcos-docker/docker-deploy.sh
@@ -55,4 +50,3 @@ jobs:
             docker pull registry.cn-hangzhou.aliyuncs.com/yido/websocket:$GITHUB_RUN_ID
             echo "start service...."
             docker run -p 8080:8080 -d registry.cn-hangzhou.aliyuncs.com/yido/websocket:$GITHUB_RUN_ID
-    
