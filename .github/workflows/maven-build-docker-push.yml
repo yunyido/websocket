@@ -37,4 +37,16 @@ jobs:
       run: docker login --username=a549137619 --password=leime727299 registry.cn-hangzhou.aliyuncs.com
     - name: Push Docker Image
       run: docker push registry.cn-hangzhou.aliyuncs.com/yido/websocket:$GITHUB_RUN_ID
+
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: 121.41.72.174
+          username: root
+          password: Abc123456
+          script: |
+            echo "hello world"
+            mkdir docker
     
