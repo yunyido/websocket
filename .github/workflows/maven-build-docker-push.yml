@@ -53,8 +53,8 @@ jobs:
         registry: registry.cn-hangzhou.aliyuncs.com
         context: ${{ github.workspace	}}
         push: true
-        tags: ${{ github.run_id }}
-    - name: deploy service
+        tags: registry.cn-hangzhou.aliyuncs.com/yido/websocket:${{ github.run_id }}
+    - name: Deploy service
       uses: appleboy/ssh-action@v1.0.0
       env: 
         run_id: "$GITHUB_RUN_ID"
