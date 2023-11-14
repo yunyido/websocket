@@ -58,8 +58,8 @@ jobs:
       uses: appleboy/ssh-action@v1.0.0        
       with:
         host: 121.41.72.174
-        username: root
-        password: Abc123456
+        username: ${{ secrets.host_username }}
+        password: ${{ secrets.host_password }}
         script: |
             echo "$run_id"
             echo "install docker..."
