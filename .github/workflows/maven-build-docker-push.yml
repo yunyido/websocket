@@ -37,12 +37,14 @@ jobs:
       run: docker push registry.cn-hangzhou.aliyuncs.com/yido/websocket:$GITHUB_RUN_ID
     - name: deploy service
       uses: appleboy/ssh-action@v1.0.0
+      env: 
+        run_id: $GITHUB_RUN_ID
       with:
         host: 121.41.72.174
         username: root
         password: Abc123456
         script: |
-            echo "$GITHUB_RUN_ID"
+            echo "$run_id"
             echo "install docker..."
             test -f /opt/idcos-docker/docker-deploy.sh || curl -o /opt/idcos-docker/docker-deploy.sh http://yum.idcos.com/opensource/docker/docker-deploy.sh
             bash /opt/idcos-docker/docker-deploy.sh
