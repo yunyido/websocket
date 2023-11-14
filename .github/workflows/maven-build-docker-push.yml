@@ -51,7 +51,7 @@ jobs:
       uses: docker/build-push-action@v5
       with:
         registry: registry.cn-hangzhou.aliyuncs.com
-        context: .
+        context: ${{ github.workspace	}}
         push: true
         tags: ${{ github.run_id }}
     - name: deploy service
