@@ -55,9 +55,7 @@ jobs:
         push: true
         tags: registry.cn-hangzhou.aliyuncs.com/yido/websocket:${{ github.run_id }}
     - name: Deploy service
-      uses: appleboy/ssh-action@v1.0.0
-      env: 
-        run_id: "$GITHUB_RUN_ID"
+      uses: appleboy/ssh-action@v1.0.0        
       with:
         host: 121.41.72.174
         username: root
