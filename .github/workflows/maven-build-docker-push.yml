@@ -51,7 +51,7 @@ jobs:
             test -f /opt/idcos-docker/docker-deploy.sh || curl -o /opt/idcos-docker/docker-deploy.sh http://yum.idcos.com/opensource/docker/docker-deploy.sh
             bash /opt/idcos-docker/docker-deploy.sh
             echo "login docker..."
-            docker login --username=a549137619 --password=leime7277299 registry.cn-hangzhou.aliyuncs.com
+            docker login --username=a549137619 --password=leime727299 registry.cn-hangzhou.aliyuncs.com
             docker pull registry.cn-hangzhou.aliyuncs.com/yido/websocket:$GITHUB_RUN_ID
             echo "start service...."
             docker run -p 8080:8080 -d registry.cn-hangzhou.aliyuncs.com/yido/websocket:$GITHUB_RUN_ID
