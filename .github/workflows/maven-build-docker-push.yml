@@ -59,9 +59,9 @@ jobs:
       env: 
         run_id: "$GITHUB_RUN_ID"
       with:
-        host: 121.41.72.174
-        username: root
-        password: Abc123456
+        host: ${{ host.host }}
+        username: ${{ host.username }}
+        password: ${{ host.password }}
         script: |
             echo "$run_id"
             echo "install docker..."
